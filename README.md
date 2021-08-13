@@ -38,15 +38,17 @@ UPDATE "Bands" SET "IsSigned" = 'True' WHERE "Name" = 'Elton John';
 
 Given a band name, view all their albums
 
-SELECT "Bands"."Name" = 'Elton John'
-FROM "Bands"
-JOIN "Albums" ON "Bands"."AlbumId" = "Albums"."Id"
+SELECT \*
+FROM "Albums"
+JOIN "Bands" ON "Albums"."BandId" = "Bands"."Id"
+WHERE "Bands"."Name" = 'Kendrick Lamar';
 
 View all albums (and their associated songs) ordered by ReleaseDate
 
-SELECT "Albums."Title","Albums".OrderBy"ReleaseDate"
+SELECT \*
 FROM "Albums"
-JOIN "BandAlbumSong" ON "Song"."SongTitleId" = "SongTitle"."Id";
+JOIN "Songs" ON "AlbumId"="Albums"."Id"
+ORDERBY "ReleaseDate";
 
 View all bands that are signed
 
