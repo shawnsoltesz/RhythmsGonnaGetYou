@@ -6,6 +6,8 @@ Lucidchart - https://lucid.app/lucidchart/invitations/accept/inv_2ab226ad-fdb8-4
 
 SQL queries:
 
+**NOTE: VSC is adding a "\" in front of the stars in the SELECT queries = "\*"**
+
 Add a new band
 
 INSERT INTO "Band" ("Name", "CountryOfOrigin", "NumberOfMembers", "Website", "Style", "IsSigned", "Contact Name", "ContactPhoneNumber")
