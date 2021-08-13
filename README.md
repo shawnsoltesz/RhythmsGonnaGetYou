@@ -14,7 +14,7 @@ VALUES ('Elton John', 'United States', 1, "eltonjohn.com", "Rock", Yes, "Ricky M
 View all the bands
 
 SELECT \*
-From "Bands";
+FROM "Bands";
 
 Add an album for a band
 
@@ -23,9 +23,28 @@ INSERT INTO "Album" ("Title", "IsExplicit", "ReleaseDate", "NameId", "SongTitleI
 **How do we get and assign FK while adding data? Do we search for it first and add to our query? What if an Album doesn't have a song assigned yet. Populate with NULL?**
 
 Add a song to an album
+
+INSERT INTO "Song" ("TrackNumber", "Title", "Duration") VALUES (4, "Yellow Brick Road", 04:53);
+
 Let a band go (update isSigned to false)
+
+UPDATE TO "Band"
+UPDATE "Bands" SET "IsSigned" = 'False' WHERE "Name" = 'Elton John';
+
 Resign a band (update isSigned to true)
+
+UPDATE TO "Band"
+UPDATE "Bands" SET "IsSigned" = 'True' WHERE "Name" = 'Elton John';
+
 Given a band name, view all their albums
+
+SELECT \*
+FROM "Albums"
+JOIN "Band" ON "Bands"."NameId" = "Name"."Id"
+WHERE "Albums"."Band" = 'Elton John';
+
 View all albums (and their associated songs) ordered by ReleaseDate
+
 View all bands that are signed
+
 View all bands that are not signed
