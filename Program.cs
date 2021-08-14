@@ -83,29 +83,127 @@ namespace RhythmsGonnaGetYou
         }
 
         static int PromptForInteger(string prompt)
-
         {
-
-            Console.Write(prompt);
-            int userInput;
-            var isThisGoodInput = Int32.TryParse(Console.ReadLine(), out userInput);
-
-            if (isThisGoodInput)
+            var isThisGoodInput = false;
+            do
             {
-                return userInput;
-            }
-            else
-            {
-                //Console.WriteLine("This is not a valid entry. Action cancelled.");
-                return 0;
-            }
+                var stringInput = PromptForString(prompt);
+
+                int numberInput;
+                isThisGoodInput = Int32.TryParse(stringInput, out numberInput);
+
+                if (isThisGoodInput)
+                {
+                    return numberInput;
+                }
+                else
+                {
+                    Console.WriteLine("Sorry, that isn't a valid input");
+                }
+            } while (!isThisGoodInput);
+
+            // We shouldn't get here, but this makes C# happy
+            return 0;
         }
 
         static void Main(string[] args)
 
         {
+            var keepGoing = true;
 
-            DisplayGreeting();
+            //var transactions = new List<Transaction>()
+
+
+            while (keepGoing)
+            {
+                DisplayGreeting();
+
+                var menuOption = PromptForString("> : ");
+
+                //( 1.) Add band
+                if (menuOption == "1")
+                {
+
+                }
+                else
+
+                //( 2.) Add album
+                if (menuOption == "2")
+                {
+                }
+                else
+
+                //( 3.) Add song
+                if (menuOption == "3")
+                {
+
+
+                }
+                else
+
+                //( 4.) Un-sign a band
+                if (menuOption == "4")
+                {
+
+                }
+                else
+
+                //( 5.) Re-sign a band
+                if (menuOption == "5")
+                {
+
+                }
+                else
+
+                //( 6.) View all bands
+                if (menuOption == "6")
+                {
+
+                }
+                else
+
+                //( 7.) View all albums
+                if (menuOption == "7")
+                {
+
+                }
+                else
+
+                //( 8.) View all albums by ReleaseDate
+                if (menuOption == "8")
+                {
+
+                }
+                else
+
+                //(9.) View all signed bands
+                if (menuOption == "9")
+                {
+
+                }
+                else
+
+                //(10.) View all non-signed bands
+                if (menuOption == "10")
+                {
+
+                }
+                else
+
+                //(11.) Quit3
+                if (menuOption == "11")
+                {
+                    keepGoing = false;
+                }
+                else
+                {
+                    Console.WriteLine("Unknown menu option.\nPlease input the number from the menu above.\n");
+                }
+            }
+
+
+
+
 
         }
     }
