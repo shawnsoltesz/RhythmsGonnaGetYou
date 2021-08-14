@@ -42,12 +42,18 @@ FROM "Albums"
 JOIN "Bands" ON "Albums"."BandId" = "Bands"."Id"
 WHERE "Bands"."Name" = 'Kendrick Lamar';
 
+SELECT \*
+FROM "Albums"
+JOIN "Bands" ON "Albums"."BandId" = "Bands"."Id"
+JOIN "Songs" ON "Songs"."AlbumId" = "Albums"."Id"
+WHERE "Bands"."Name" = 'ABBA';
+
 View all albums (and their associated songs) ordered by ReleaseDate
 
 SELECT \*
 FROM "Albums"
 JOIN "Songs" ON "AlbumId"="Albums"."Id"
-ORDERBY "ReleaseDate";
+ORDER BY "ReleaseDate";
 
 View all bands that are signed
 
@@ -64,3 +70,13 @@ WHERE "Bands"."IsSigned" = False;
 PARKING LOT
 Figure out loop through menu so doesn't have to be restarted over and over
 Input validation on menu entries
+
+Question: Review how to create the multiple criteria queries in SQL on the joined query.
+Review: Clarity on the assignment, when we add, we need to build an entire query that prompts to search for item before adding (band, album, song). Then if no match, add? So are the inputs a multi-step process:
+
+1. Search for item to add
+2. If match, terminate add
+3. If no match, collect the data in prompts needed for the table
+4. If a field is blank for adding, just accept the user input, assign NULL and add to table
+
+\*\*\*Same process for Band, Album and Song, just different tables to write to

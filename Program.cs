@@ -1,7 +1,36 @@
 ﻿using System;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace RhythmsGonnaGetYou
 {
+
+    // Define a database context for our BeatBoxStudio database.
+    // It derives from (has a parent of) DbContext so we get all the
+    // abilities of a database context from EF Core.
+    class BeatBoxStudioContext : DbContext
+    {
+        // Define a movies property that is a DbSet.
+        public DbSet<Band> Bands { get; set; }
+        public DbSet<Album> Albums { get; set; }
+        public DbSet<Song> Songs { get; set; }
+
+        // Define a method required by EF that will configure our connection
+        // to the database.
+        //
+        // DbContextOptionsBuilder is provided to us. We then tell that object
+        // we want to connect to a postgres database named BeatBoxStudio on
+        // our local machine.
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+
+        {
+            optionsBuilder.UseNpgsql("server=localhost;database=BeatBoxStudio");
+        }
+
+        var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+        optionsBuilder.UseLoggerFactory(loggerFactory);
+    }
 
     class Band
 
@@ -109,6 +138,27 @@ namespace RhythmsGonnaGetYou
         static void Main(string[] args)
 
         {
+            // Get a new context which will connect to the database
+            var context = new BeatBoxStudioContext();
+
+            // Get a reference to our collection of movies.
+            // NOTE: this doesn't yet access any of them, just gives
+            // us a variable that knows how.
+            //context.Bands;
+            //context.Albums;
+            //context.Songs;
+
+
+
+            var bandCount = context.Bands.Count();
+            Console.WriteLine($"There are {bandCount} movies!");
+
+            var albumCount = context.Albums.Count();
+            Console.WriteLine($"There are {albumCount} movies!");
+
+            var songCount = context.Songs.Count();
+            Console.WriteLine($"There are {songCount} movies!");
+
             var keepGoing = true;
 
             //var transactions = new List<Transaction>()
