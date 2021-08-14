@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -132,60 +133,38 @@ namespace RhythmsGonnaGetYou
             return 0;
         }
 
-        public static bool getBoolInputValue(string inputType)
+        public static bool getBoolInputValue(string IsSigned)
         {
-            bool value;
-            bool valid;
-            do
+            var IsSignedToLower = IsSigned.ToLower();
+
+            if (IsSigned.Equals("y", StringComparison.OrdinalIgnoreCase))
             {
-                Console.WriteLine("Enter yes or no: ");
-                var inputString = Console.ReadLine();
+                return true;
+            }
+            else if (IsSigned.Equals("n", StringComparison.OrdinalIgnoreCase))
+            {
+                return false;
+            }
+            else
+            {
+                throw new Exception("The data is not in the correct format.");
 
-                if (String.IsNullOrEmpty(inputString))
-
-                {
-                    continue;
-                }
-
-                if (string.Equals(inputString, "yes"))
-
-                {
-                    value = true;
-                    valid = true;
-                }
-
-                else if (string.Equals(inputString, "no"))
-
-                {
-                    value = false;
-                    valid = false;
-                }
-
-            } while (!valid);
-
-            return value;
+            }
         }
-
         static void Main(string[] args)
-
         {
             var context = new BeatBoxStudioContext();
-            //context.Bands;
-            //context.Albums;
-            //context.Songs;
 
-            var bandCount = context.Bands.Count();
-            Console.WriteLine($"There are {bandCount} bands!");
+            //var bandCount = context.Bands.Count();
+            //Console.WriteLine($"There are {bandCount} bands!");
 
-            var albumCount = context.Albums.Count();
-            Console.WriteLine($"There are {albumCount} albums!");
+            //var albumCount = context.Albums.Count();
+            //Console.WriteLine($"There are {albumCount} albums!");
 
-            var songCount = context.Songs.Count();
-            Console.WriteLine($"There are {songCount} songs!");
+            //var songCount = context.Songs.Count();
+            //Console.WriteLine($"There are {songCount} songs!");
 
             var keepGoing = true;
-
-            //var transactions = new List<Transaction>()
 
             while (keepGoing)
             {
@@ -201,7 +180,7 @@ namespace RhythmsGonnaGetYou
                 var searchBands = PromptForString("> : ");
 
 
-                var existingBand = context.Bands.FirstOrDefault(Band => Band.Name == searchBands);
+                var existingBand = context.Bands.FirstOrDefault(Bands => Bands.Name == searchBands);
 
                 // If we found an existing band.
 
@@ -215,29 +194,29 @@ namespace RhythmsGonnaGetYou
                 //If not a match, prompt for inputs from user to add Band
 
                 {
+                    Console.WriteLine("Name of the band: ");
+                    Console.WriteLine($"{searchBands}");
+                    var name = searchBands;
 
-                    Console.Write("Name of the band: ");
-                    var name = Console.ReadLine();
-
-                    Console.Write("Country of origin of the band: ");
+                    Console.WriteLine("Country of origin of the band: ");
                     var countryOfOrigin = Console.ReadLine();
 
-                    Console.Write("Number of members in band: ");
+                    Console.WriteLine("Number of members in band: ");
                     var numberOfMembers = int.Parse(Console.ReadLine());
 
-                    Console.Write("Band website: ");
+                    Console.WriteLine("Band website: ");
                     var website = Console.ReadLine();
 
-                    Console.Write("Band's genre of music): ");
+                    Console.WriteLine("Band's genre of music: ");
                     var style = Console.ReadLine();
 
-                    Console.Write("Is the band signed with BeatBox Studio: [Answer = True/False] ");
+                    Console.WriteLine("Is the band signed with BeatBox Studio - [Answer = Yes/No]: ");
                     var isSigned = getBoolInputValue(Console.ReadLine());
 
-                    Console.Write("Contact name: ");
+                    Console.WriteLine("Contact name: ");
                     var contactName = Console.ReadLine();
 
-                    Console.Write("Contact phone: ");
+                    Console.WriteLine("Contact phone: ");
                     var contactPhoneNumber = Console.ReadLine();
 
                     var newBand = new Band
@@ -257,6 +236,7 @@ namespace RhythmsGonnaGetYou
 
                     context.Bands.Add(newBand);
                     context.SaveChanges();
+                    Console.WriteLine($"Your entry of {name} has been saved.");
                 }
 
                 //Add album
