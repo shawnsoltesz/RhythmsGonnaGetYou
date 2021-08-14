@@ -59,3 +59,7 @@ View all bands that are not signed
 
 SELECT \*
 WHERE "Bands"."IsSigned" = False;
+
+PARKING LOT
+Figure out loop through menu so doesn't have to be restarted over and over
+Input validation on menu entries

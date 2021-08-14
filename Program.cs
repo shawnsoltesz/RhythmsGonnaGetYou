@@ -3,7 +3,7 @@
 namespace RhythmsGonnaGetYou
 {
 
-    class Bands
+    class Band
 
     {
         public int Id { get; set; }
@@ -17,7 +17,7 @@ namespace RhythmsGonnaGetYou
         public string ContactPhoneNumber { get; set; }
     }
 
-    class Albums
+    class Album
 
     {
 
@@ -29,7 +29,7 @@ namespace RhythmsGonnaGetYou
 
     }
 
-    class Songs
+    class Song
 
     {
 
@@ -47,23 +47,24 @@ namespace RhythmsGonnaGetYou
 
         {
 
-            Console.WriteLine("\n\n        Welcome to BeatBOX Studio            \n");
-            Console.WriteLine("    * * * * * * * * * * * * * * * * \n");
-            Console.WriteLine("              Studio Manager        \n");
-            Console.WriteLine("    *-*-*-*-*-*-*-MENU-*-*-*-*-*-*  \n");
+            Console.WriteLine("\n\n");
+            Console.WriteLine("  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * \n");
+            Console.WriteLine("                     Welcome to BeatBOX Studio\n");
+            Console.WriteLine("                      Music Collection Manager \n");
+            Console.WriteLine("    *-*-*-*-*-*-*-*-*-*-*-*-*- MENU -*-*-*-*-*-*-*-*-*-*-*-*  \n");
 
             Console.WriteLine("MUSIC ADMINISTRATION\n");
-            Console.WriteLine("(1.) Add a new band");
-            Console.WriteLine("(2.) Add an album for a band");
-            Console.WriteLine("(3.) Add a song to an album");
-            Console.WriteLine("(4.) Un-sign a band"); //(update isSigned to false)
-            Console.WriteLine("(5.) Re-sign a band\n"); //(update isSigned to true)
+            Console.WriteLine("( 1.) Add band");
+            Console.WriteLine("( 2.) Add album");
+            Console.WriteLine("( 3.) Add song");
+            Console.WriteLine("( 4.) Un-sign a band"); //(update isSigned to false)
+            Console.WriteLine("( 5.) Re-sign a band\n"); //(update isSigned to true)
 
             Console.WriteLine("REPORTS\n");
-            Console.WriteLine("(6.) View all the bands");
-            Console.WriteLine("(7.) View all band albums");
-            Console.WriteLine("(8.) View all albums by ReleaseDate");
-            Console.WriteLine("(9.) View all signed bands");
+            Console.WriteLine("( 6.) View all bands");
+            Console.WriteLine("( 7.) View all albums");
+            Console.WriteLine("( 8.) View all albums by ReleaseDate");
+            Console.WriteLine("( 9.) View all signed bands");
             Console.WriteLine("(10.) View all non-signed bands\n");
             Console.WriteLine("(11.) Quit\n");
 
