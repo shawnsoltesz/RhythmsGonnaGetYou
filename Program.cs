@@ -5,10 +5,6 @@ using Microsoft.Extensions.Logging;
 
 namespace RhythmsGonnaGetYou
 {
-
-    // Define a database context for our BeatBoxStudio database.
-    // It derives from (has a parent of) DbContext so we get all the
-    // abilities of a database context from EF Core.
     class BeatBoxStudioContext : DbContext
     {
         // Define a movies property that is a DbSet.
@@ -26,10 +22,11 @@ namespace RhythmsGonnaGetYou
 
         {
             optionsBuilder.UseNpgsql("server=localhost;database=BeatBoxStudio");
-        }
 
-        var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
-        optionsBuilder.UseLoggerFactory(loggerFactory);
+
+            var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+            optionsBuilder.UseLoggerFactory(loggerFactory);
+        }
     }
 
     class Band
@@ -135,29 +132,56 @@ namespace RhythmsGonnaGetYou
             return 0;
         }
 
+        public static bool getBoolInputValue(string inputType)
+        {
+            bool value;
+            bool valid;
+            do
+            {
+                Console.WriteLine("Enter yes or no: ");
+                var inputString = Console.ReadLine();
+
+                if (String.IsNullOrEmpty(inputString))
+
+                {
+                    continue;
+                }
+
+                if (string.Equals(inputString, "yes"))
+
+                {
+                    value = true;
+                    valid = true;
+                }
+
+                else if (string.Equals(inputString, "no"))
+
+                {
+                    value = false;
+                    valid = false;
+                }
+
+            } while (!valid);
+
+            return value;
+        }
+
         static void Main(string[] args)
 
         {
-            // Get a new context which will connect to the database
             var context = new BeatBoxStudioContext();
-
-            // Get a reference to our collection of movies.
-            // NOTE: this doesn't yet access any of them, just gives
-            // us a variable that knows how.
             //context.Bands;
             //context.Albums;
             //context.Songs;
 
-
-
             var bandCount = context.Bands.Count();
-            Console.WriteLine($"There are {bandCount} movies!");
+            Console.WriteLine($"There are {bandCount} bands!");
 
             var albumCount = context.Albums.Count();
-            Console.WriteLine($"There are {albumCount} movies!");
+            Console.WriteLine($"There are {albumCount} albums!");
 
             var songCount = context.Songs.Count();
-            Console.WriteLine($"There are {songCount} movies!");
+            Console.WriteLine($"There are {songCount} songs!");
 
             var keepGoing = true;
 
@@ -169,77 +193,136 @@ namespace RhythmsGonnaGetYou
 
                 var menuOption = PromptForString("> : ");
 
-                //( 1.) Add band
+                //Add band
                 if (menuOption == "1")
-                {
 
+                    //Search bands for band name input by user
+                    Console.WriteLine("What is the name of the band you would like to add?");
+                var searchBands = PromptForString("> : ");
+
+
+                var existingBand = context.Bands.FirstOrDefault(Band => Band.Name == searchBands);
+
+                // If we found an existing band.
+
+                if (existingBand != null)
+                {
+                    Console.WriteLine($"{searchBands} already exists in our records as a Band.\nPlease double check.");
                 }
+
                 else
 
-                //( 2.) Add album
+                //If not a match, prompt for inputs from user to add Band
+
+                {
+
+                    Console.Write("Name of the band: ");
+                    var name = Console.ReadLine();
+
+                    Console.Write("Country of origin of the band: ");
+                    var countryOfOrigin = Console.ReadLine();
+
+                    Console.Write("Number of members in band: ");
+                    var numberOfMembers = int.Parse(Console.ReadLine());
+
+                    Console.Write("Band website: ");
+                    var website = Console.ReadLine();
+
+                    Console.Write("Band's genre of music): ");
+                    var style = Console.ReadLine();
+
+                    Console.Write("Is the band signed with BeatBox Studio: [Answer = True/False] ");
+                    var isSigned = getBoolInputValue(Console.ReadLine());
+
+                    Console.Write("Contact name: ");
+                    var contactName = Console.ReadLine();
+
+                    Console.Write("Contact phone: ");
+                    var contactPhoneNumber = Console.ReadLine();
+
+                    var newBand = new Band
+                    {
+                        Name = name,
+                        CountryOfOrigin = countryOfOrigin,
+                        NumberOfMembers = numberOfMembers,
+                        Website = website,
+                        Style = style,
+                        IsSigned = isSigned,
+                        ContactName = contactName,
+                        ContactPhoneNumber = contactPhoneNumber,
+                    };
+
+                    //4. Add Band to db (context.Bands.Add(newBand);
+                    //5. Save changes - (context.SaveChanges();)
+
+                    context.Bands.Add(newBand);
+                    context.SaveChanges();
+                }
+
+                //Add album
                 if (menuOption == "2")
                 {
+
                 }
                 else
 
-                //( 3.) Add song
+                //Add song
                 if (menuOption == "3")
                 {
 
-
                 }
                 else
 
-                //( 4.) Un-sign a band
+                //Un-sign a band
                 if (menuOption == "4")
                 {
 
                 }
                 else
 
-                //( 5.) Re-sign a band
+                //Re-sign a band
                 if (menuOption == "5")
                 {
 
                 }
                 else
 
-                //( 6.) View all bands
+                //View all bands
                 if (menuOption == "6")
                 {
 
                 }
                 else
 
-                //( 7.) View all albums
+                //View all albums
                 if (menuOption == "7")
                 {
 
                 }
                 else
 
-                //( 8.) View all albums by ReleaseDate
+                //View all albums by ReleaseDate
                 if (menuOption == "8")
                 {
 
                 }
                 else
 
-                //(9.) View all signed bands
+                //View all signed bands
                 if (menuOption == "9")
                 {
 
                 }
                 else
 
-                //(10.) View all non-signed bands
+                //View all non-signed bands
                 if (menuOption == "10")
                 {
 
                 }
                 else
 
-                //(11.) Quit3
+                //Quit
                 if (menuOption == "11")
                 {
                     keepGoing = false;
@@ -252,4 +335,6 @@ namespace RhythmsGonnaGetYou
         }
     }
 }
+
+
 
