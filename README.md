@@ -80,3 +80,11 @@ Review: Clarity on the assignment, when we add, we need to build an entire query
 4. If a field is blank for adding, just accept the user input, assign NULL and add to table
 
 \*\*\*Same process for Band, Album and Song, just different tables to write to
+
+Add Band
+
+1. Search bands for band name input by user
+2. If a match, display message indicating Band already exists and display Band data
+3. If not a match, display message indicating Band doesn't exist and prompt for inputs from user to add Band
+4. Add Band to db (context.Bands.Add(newBand);
+5. Save changes - (context.SaveChanges();)
