@@ -98,7 +98,7 @@ namespace RhythmsGonnaGetYou
                 }
                 else
                 {
-                    Console.WriteLine("Sorry, that isn't a valid input");
+                    Console.WriteLine("Sorry, that isn't a valid input - Please try again.");
                 }
             } while (!isThisGoodInput);
 
@@ -112,7 +112,6 @@ namespace RhythmsGonnaGetYou
             var keepGoing = true;
 
             //var transactions = new List<Transaction>()
-
 
             while (keepGoing)
             {
@@ -197,14 +196,9 @@ namespace RhythmsGonnaGetYou
                 }
                 else
                 {
-                    Console.WriteLine("Unknown menu option.\nPlease input the number from the menu above.\n");
+                    Console.WriteLine("ALERT: Unknown menu option.\nPlease input the number from the menu above.\n");
                 }
             }
-
-
-
-
-
         }
     }
 }

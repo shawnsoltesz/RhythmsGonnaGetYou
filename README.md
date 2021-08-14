@@ -28,7 +28,6 @@ INSERT INTO "Songs" ("TrackNumber", "Title", "Duration") VALUES (4, "Yellow Bric
 
 Let a band go (update isSigned to false)
 
-UPDATE TO "Bands"
 UPDATE "Bands" SET "IsSigned" = 'False' WHERE "Name" = 'Elton John';
 
 Resign a band (update isSigned to true)
@@ -53,11 +52,13 @@ ORDERBY "ReleaseDate";
 View all bands that are signed
 
 SELECT \*
+FROM "Bands"
 WHERE "Bands"."IsSigned" = True;
 
 View all bands that are not signed
 
 SELECT \*
+FROM "Bands"
 WHERE "Bands"."IsSigned" = False;
 
 PARKING LOT
