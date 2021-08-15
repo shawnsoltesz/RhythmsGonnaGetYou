@@ -117,8 +117,7 @@ namespace RhythmsGonnaGetYou
                 if (menuOption == "1")
                 {
                     //Search bands for band name input by user
-                    Console.WriteLine("What is the name of the band you would like to add?");
-                    var searchBands = PromptForString("> : ");
+                    var searchBands = PromptForString("What is the name of the band you would like to add?");
 
                     var existingBand = context.Bands.FirstOrDefault(Bands => Bands.Name == searchBands);
 
@@ -127,7 +126,6 @@ namespace RhythmsGonnaGetYou
                     if (existingBand != null)
                     {
                         Console.WriteLine($"{searchBands} already exists in our records as a Band.\nPlease double check.");
-
                     }
 
                     else
@@ -139,26 +137,21 @@ namespace RhythmsGonnaGetYou
                         Console.WriteLine($"{searchBands}");
                         var bandName = searchBands;
 
-                        Console.WriteLine("Country of origin of the band: ");
-                        var countryOfOrigin = Console.ReadLine();
+                        var countryOfOrigin = PromptForString("\nCountry of origin of the band: \n");
 
-                        Console.WriteLine("Number of members in band: ");
+                        Console.WriteLine("Number of members in band:");
                         var numberOfMembers = int.Parse(Console.ReadLine());
 
-                        Console.WriteLine("Band website: ");
-                        var website = Console.ReadLine();
+                        var website = PromptForString("Band website: \n");
 
-                        Console.WriteLine("Band's genre of music: ");
-                        var style = Console.ReadLine();
+                        var style = PromptForString("Genre of music: \n");
 
                         Console.WriteLine("Is the band signed with BeatBox Studio - [Answer = Yes/No]: ");
                         var isSigned = getBoolInputValue(Console.ReadLine());
 
-                        Console.WriteLine("Contact name: ");
-                        var contactName = Console.ReadLine();
+                        var contactName = PromptForString("Contact name: \n");
 
-                        Console.WriteLine("Contact phone: ");
-                        var contactPhoneNumber = Console.ReadLine();
+                        var contactPhoneNumber = PromptForString("Contact phone: \n");
 
                         var newBand = new Band
                         {
@@ -203,29 +196,24 @@ namespace RhythmsGonnaGetYou
                     //If not a match, prompt for inputs from user to add Band first
 
                     {
-                        Console.WriteLine("Name of the band: ");
-                        var bandName = Console.ReadLine();
 
-                        Console.WriteLine("Country of origin of the band: ");
-                        var countryOfOrigin = Console.ReadLine();
+                        var bandName = PromptForString("Name of the band: ");
+
+                        var countryOfOrigin = PromptForString("Country of origin of the band:  ");
 
                         Console.WriteLine("Number of members in band: ");
                         var numberOfMembers = int.Parse(Console.ReadLine());
 
-                        Console.WriteLine("Band website: ");
-                        var website = Console.ReadLine();
+                        var website = PromptForString("Band website:  ");
 
-                        Console.WriteLine("Band's genre of music: ");
-                        var style = Console.ReadLine();
+                        var style = PromptForString("Genre of music: ");
 
                         Console.WriteLine("Is the band signed with BeatBox Studio - [Answer = Yes/No]: ");
                         var isSigned = getBoolInputValue(Console.ReadLine());
 
-                        Console.WriteLine("Contact name: ");
-                        var contactName = Console.ReadLine();
+                        var contactName = PromptForString("Contact name: ");
 
-                        Console.WriteLine("Contact phone: ");
-                        var contactPhoneNumber = Console.ReadLine();
+                        var contactPhoneNumber = PromptForString("Contact phone: ");
 
                         var newBand = new Band
                         {
@@ -252,14 +240,13 @@ namespace RhythmsGonnaGetYou
                         int albumPK = context.Bands.FirstOrDefault(BandsId => BandsId = bandName;
 
                         //Add the Album
-                        Console.WriteLine("Title of the Album: ");
-                        var albumTitle = Console.ReadLine();
+                        var albumTitle = PromptForString("Title of the Album: "); ;
 
                         Console.WriteLine("Rated Explicit - [Answer = Yes/No]: ");
                         var isExplicit = getBoolInputValue(Console.ReadLine());
 
                         Console.WriteLine("Album Release Date:");
-                        var releaseDate = DateTime.PromptForString;
+                        var releaseDate = Console.ReadLine(DateTime.ToString);
 
                         //not entered by user: var BandId = albumPK;
 
@@ -283,17 +270,17 @@ namespace RhythmsGonnaGetYou
                 if (menuOption == "3")
 
                     //Search albums titles input by user
-                    Console.WriteLine("What is the name of the album you would like to add?");
-                var searchAlbums = PromptForString("> : ");
+                    Console.WriteLine("What is the name of the song you would like to add?");
+                var searchSong = PromptForString("> : ");
 
 
-                var existingAlbum = context.Albums.FirstOrDefault(Albums => Albums.Title == searchAlbums);
+                var existingSong = context.Songs.FirstOrDefault(Songs => Songs.Title == searchSong);
 
                 // If we found an existing album.
 
-                if (existingAlbum != null)
+                if (existingSong != null)
                 {
-                    Console.WriteLine($"{searchAlbums} already exists in our records as an Album.\nPlease double check.");
+                    Console.WriteLine($"{searchSong} already exists in our records as an Album.\nPlease double check.");
                 }
 
                 else
@@ -301,29 +288,24 @@ namespace RhythmsGonnaGetYou
                 //If not a match, prompt for inputs from user to add Band first
 
                 {
-                    Console.WriteLine("Name of the band: ");
-                    var bandName = Console.ReadLine();
+                    var bandName = PromptForString("Name of the band: ");
 
-                    Console.WriteLine("Country of origin of the band: ");
-                    var countryOfOrigin = Console.ReadLine();
+                    var countryOfOrigin = PromptForString("Country of origin of the band:  ");
 
                     Console.WriteLine("Number of members in band: ");
                     var numberOfMembers = int.Parse(Console.ReadLine());
 
-                    Console.WriteLine("Band website: ");
-                    var website = Console.ReadLine();
+                    var website = PromptForString("Band website:  ");
 
-                    Console.WriteLine("Band's genre of music: ");
-                    var style = Console.ReadLine();
+                    var style = PromptForString("Genre of music: ");
 
                     Console.WriteLine("Is the band signed with BeatBox Studio - [Answer = Yes/No]: ");
                     var isSigned = getBoolInputValue(Console.ReadLine());
 
-                    Console.WriteLine("Contact name: ");
-                    var contactName = Console.ReadLine();
+                    var contactName = PromptForString("Contact name: ");
 
-                    Console.WriteLine("Contact phone: ");
-                    var contactPhoneNumber = Console.ReadLine();
+                    var contactPhoneNumber = PromptForString("Contact phone: ");
+
 
                     var newBand = new Band
                     {
@@ -348,16 +330,15 @@ namespace RhythmsGonnaGetYou
                     //obtain the newly added band Primary Key to pass as the foreign key
 
                     int albumPK = context.Bands.FirstOrDefault(BandsId => BandsId = bandName;
+                    //User enters album information
 
-                    //Add the Album
-                    Console.WriteLine("Title of the Album: ");
-                    var albumTitle = Console.ReadLine();
+                    var albumTitle = PromptForString("Title of the Album: ");
 
                     Console.WriteLine("Rated Explicit - [Answer = Yes/No]: ");
                     var isExplicit = getBoolInputValue(Console.ReadLine());
 
                     Console.WriteLine("Album Release Date:");
-                    var releaseDate = DateTime.PromptForString;
+                    var releaseDate = DateTime.Console.ReadLine();
 
                     //not entered by user: var BandId = albumPK;
 
@@ -373,6 +354,31 @@ namespace RhythmsGonnaGetYou
                     //Add and save the album to the db
                     context.Albums.Add(newAlbum);
                     context.SaveChanges();
+
+                    //User enters song information
+                    Console.WriteLine("Track Number: ");
+                    var songTrackNumber = int.Parse(Console.ReadLine());
+
+                    var songTitle = PromptForString("Title of the song: ");
+
+                    Console.WriteLine("Album Release Date:");
+                    var songDuration = PromptForString("Song duration - [00:00:00]");
+
+                    //not entered by user: var BandId = albumPK;
+
+                    var newSong = new Song
+                    {
+
+                        TrackNumber = songTrackNumber,
+                        Title = songTitle,
+                        Duration = songDuration,
+
+                    };
+
+                    //Add and save the album to the db
+                    context.Albums.Add(newAlbum);
+                    context.SaveChanges();
+
                     Console.WriteLine($"Your entry of {albumTitle} has been saved.");
                 }
             }
@@ -381,80 +387,99 @@ namespace RhythmsGonnaGetYou
             if (menuOption == "4")
 
             {
-                Console.WriteLine("Option 4");
+                var searchBands = PromptForString("What is the name of the band you would like to un-sign?");
 
-            }
-            else
+                var existingBand = context.Bands.FirstOrDefault(Bands => Bands.Name == searchBands);
 
-            //Re-sign a band
-            if (menuOption == "5")
-            {
+                // If we did not find an existing band.
 
-                Console.WriteLine("Option 5");
+                if (existingBand == null)
+                {
+                    Console.WriteLine($"{searchBands} does not exist in our records as a Band.\nPlease double check.");
+                }
 
-            }
-            else
+                else
 
-            //View all bands
-            if (menuOption == "6")
-            {
+                //If not a match, prompt for inputs from user to add Band
 
-                Console.WriteLine("Option 6");
+                {
+                    searchBands.Bands.isSigned = false;
+                    context.SaveChanges();
 
-            }
-            else
+                    Console.WriteLine($"{searchBands} has been updated to 'Un-signed'.");
 
-            //View all albums
-            if (menuOption == "7")
-            {
+                }
 
-                Console.WriteLine("Option 7");
 
-            }
-            else
+                //Re-sign a band
+                if (menuOption == "5")
+                {
 
-            //View all albums by ReleaseDate
-            if (menuOption == "8")
-            {
+                    Console.WriteLine("Option 5");
 
-                Console.WriteLine("Option 8");
+                }
 
-            }
-            else
 
-            //View all signed bands
-            if (menuOption == "9")
-            {
+                //View all bands
+                if (menuOption == "6")
+                {
 
-                Console.WriteLine("Option 9");
+                    Console.WriteLine("Option 6");
 
-            }
-            else
+                }
+                else
 
-            //View all non-signed bands
-            if (menuOption == "10")
-            {
+                //View all albums
+                if (menuOption == "7")
+                {
 
-                Console.WriteLine("Option 10");
+                    Console.WriteLine("Option 7");
 
-            }
-            else
+                }
+                else
 
-            //Quit
-            if (menuOption == "11")
-            {
-                keepGoing = false;
-                break;
+                //View all albums by ReleaseDate
+                if (menuOption == "8")
+                {
 
-            }
-            else
-            {
-                Console.WriteLine("\nPlease input the number from the menu.\n");
+                    Console.WriteLine("Option 8");
+
+                }
+                else
+
+                //View all signed bands
+                if (menuOption == "9")
+                {
+
+                    Console.WriteLine("Option 9");
+
+                }
+                else
+
+                //View all non-signed bands
+                if (menuOption == "10")
+                {
+
+                    Console.WriteLine("Option 10");
+
+                }
+                else
+
+                //Quit
+                if (menuOption == "11")
+                {
+                    keepGoing = false;
+                    break;
+
+                }
+                else
+                {
+                    Console.WriteLine("\nPlease input the number from the menu.\n");
+                }
             }
         }
     }
 }
-    }
 
 
 
