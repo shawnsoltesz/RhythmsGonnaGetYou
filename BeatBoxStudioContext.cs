@@ -22,8 +22,8 @@ namespace RhythmsGonnaGetYou
             optionsBuilder.UseNpgsql("server=localhost;database=BeatBoxStudio");
 
 
-            var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
-            optionsBuilder.UseLoggerFactory(loggerFactory);
+            //var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+            //optionsBuilder.UseLoggerFactory(loggerFactory);
         }
     }
 }
