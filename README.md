@@ -84,15 +84,22 @@ Review: Clarity on the assignment, when we add, we need to build an entire query
 Add Band
 
 1. Search bands for band name input by user
-2. If a match, display message indicating Band already exists and display Band data
+2. If a match, display message indicating Band already exists and cancel request
 3. If not a match, display message indicating Band doesn't exist and prompt for inputs from user to add Band
 4. Add Band to db (context.Bands.Add(newBand);
 5. Save changes - (context.SaveChanges();)
 
-fail: Microsoft.EntityFrameworkCore.Database.Command[20102]
-Failed executing DbCommand (17ms) [Parameters=[@p0='?', @p1='?', @p2='?', @p3='?' (DbType = Boolean), @p4='?', @p5='?' (DbType = Int32), @p6='?', @p7='?'], CommandType='Text', CommandTimeout='30']
-INSERT INTO "Bands" ("ContactName", "ContactPhoneNumber", "CountryOfOrigin", "IsSigned", "Name", "NumberOfMembers", "Style", "Website")
-VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7)
-RETURNING "Id";
-fail: Microsoft.EntityFrameworkCore.Update[10000]
-An exception occurred in the database while saving changes for context type 'RhythmsGonnaGetYou.BeatBoxStudioContext'.
+Add Album
+
+1. Search albums for album title input by user
+2. If a match, display message indicating album already exists and cancel request
+3. If not a match, display message indicating Album doesn't exist and prompt for inputs from user to add Band and Album
+
+Prompt for new band entires
+Add Band to db
+Save changes
+Search for newly added band and obtain PK
+Prompt for new album entries
+auto add PK as FK into query submission
+Add Album to db
+Save changes
