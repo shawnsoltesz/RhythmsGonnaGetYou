@@ -1,71 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace RhythmsGonnaGetYou
 {
-    class BeatBoxStudioContext : DbContext
-    {
-        // Define a movies property that is a DbSet.
-        public DbSet<Band> Bands { get; set; }
-        public DbSet<Album> Albums { get; set; }
-        public DbSet<Song> Songs { get; set; }
-
-        // Define a method required by EF that will configure our connection
-        // to the database.
-        //
-        // DbContextOptionsBuilder is provided to us. We then tell that object
-        // we want to connect to a postgres database named BeatBoxStudio on
-        // our local machine.
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-
-        {
-            optionsBuilder.UseNpgsql("server=localhost;database=BeatBoxStudio");
-
-
-            var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
-            optionsBuilder.UseLoggerFactory(loggerFactory);
-        }
-    }
-
-    class Band
-
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string CountryOfOrigin { get; set; }
-        public int NumberOfMembers { get; set; }
-        public string Website { get; set; }
-        public string Style { get; set; }
-        public bool IsSigned { get; set; }
-        public string ContactName { get; set; }
-        public string ContactPhoneNumber { get; set; }
-    }
-
-    class Album
-
-    {
-
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public bool IsExplicit { get; set; }
-        public DateTime ReleaseDate { get; set; }
-        public string BandId { get; set; }
-
-    }
-
-    class Song
-
-    {
-
-        public int Id { get; set; }
-        public int TrackNumber { get; set; }
-        public string Duration { get; set; }
-        public string AlbumId { get; set; }
-
-    }
 
     class Program
 
@@ -147,7 +85,7 @@ namespace RhythmsGonnaGetYou
             }
             else
             {
-                throw new Exception("The data is not in the correct format.");
+                return false;
 
             }
         }
@@ -187,6 +125,7 @@ namespace RhythmsGonnaGetYou
                 if (existingBand != null)
                 {
                     Console.WriteLine($"{searchBands} already exists in our records as a Band.\nPlease double check.");
+                    break;
                 }
 
                 else
@@ -306,6 +245,7 @@ namespace RhythmsGonnaGetYou
                 if (menuOption == "11")
                 {
                     keepGoing = false;
+                    break;
                 }
                 else
                 {
