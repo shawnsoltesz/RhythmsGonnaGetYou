@@ -1,3 +1,10 @@
 {
-  "cSpell.ignoreWords": ["eltonjohn", "lucidchart", "npgsql", "postgres", "use"]
+  "cSpell.ignoreWords": [
+    "eltonjohn",
+    "lucidchart",
+    "npgsql",
+    "postgres",
+    "use",
+    "yyyymmdd"
+  ]
 }

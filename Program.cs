@@ -268,155 +268,174 @@ namespace RhythmsGonnaGetYou
 
                 //Add song
                 if (menuOption == "3")
-
+                {
                     //Search albums titles input by user
                     Console.WriteLine("What is the name of the song you would like to add?");
-                var searchSong = PromptForString("> : ");
+                    var searchSong = PromptForString("> : ");
 
 
-                var existingSong = context.Songs.FirstOrDefault(Songs => Songs.Title == searchSong);
+                    var existingSong = context.Songs.FirstOrDefault(Songs => Songs.Title == searchSong);
 
-                // If we found an existing album.
+                    // If we found an existing album.
 
-                if (existingSong != null)
-                {
-                    Console.WriteLine($"{searchSong} already exists in our records as an Album.\nPlease double check.");
-                }
-
-                else
-
-                //If not a match, prompt for inputs from user to add Band first
-
-                {
-                    var bandName = PromptForString("Name of the band: ");
-
-                    var countryOfOrigin = PromptForString("Country of origin of the band:  ");
-
-                    Console.WriteLine("Number of members in band: ");
-                    var numberOfMembers = int.Parse(Console.ReadLine());
-
-                    var website = PromptForString("Band website:  ");
-
-                    var style = PromptForString("Genre of music: ");
-
-                    Console.WriteLine("Is the band signed with BeatBox Studio - [Answer = Yes/No]: ");
-                    var isSigned = getBoolInputValue(Console.ReadLine());
-
-                    var contactName = PromptForString("Contact name: ");
-
-                    var contactPhoneNumber = PromptForString("Contact phone: ");
-
-
-                    var newBand = new Band
+                    if (existingSong != null)
                     {
-                        Name = bandName,
-                        CountryOfOrigin = countryOfOrigin,
-                        NumberOfMembers = numberOfMembers,
-                        Website = website,
-                        Style = style,
-                        IsSigned = isSigned,
-                        ContactName = contactName,
-                        ContactPhoneNumber = contactPhoneNumber,
-                    };
+                        Console.WriteLine($"{searchSong} already exists in our records as an Album.\nPlease double check.");
+                    }
 
-                    //4. Add Band to db (context.Bands.Add(newBand);
-                    //5. Save changes - (context.SaveChanges();)
+                    else
 
-                    context.Bands.Add(newBand);
-                    context.SaveChanges();
+                    //If not a match, prompt for inputs from user to add Band first
 
-                    // Band added, now to add Album with BandID to link the two together
-
-                    //obtain the newly added band Primary Key to pass as the foreign key
-
-                    int albumPK = context.Bands.FirstOrDefault(BandsId => BandsId = bandName;
-                    //User enters album information
-
-                    var albumTitle = PromptForString("Title of the Album: ");
-
-                    Console.WriteLine("Rated Explicit - [Answer = Yes/No]: ");
-                    var isExplicit = getBoolInputValue(Console.ReadLine());
-
-                    Console.WriteLine("Album Release Date:");
-                    var releaseDate = DateTime.Console.ReadLine();
-
-                    //not entered by user: var BandId = albumPK;
-
-                    var newAlbum = new Album
                     {
-                        Title = albumTitle,
-                        IsExplicit = isExplicit,
-                        ReleaseDate = releaseDate,
-                        BandId = albumPK,
+                        var bandName = PromptForString("Name of the band: ");
 
-                    };
+                        var countryOfOrigin = PromptForString("Country of origin of the band:  ");
 
-                    //Add and save the album to the db
-                    context.Albums.Add(newAlbum);
-                    context.SaveChanges();
+                        Console.WriteLine("Number of members in band: ");
+                        var numberOfMembers = int.Parse(Console.ReadLine());
 
-                    //User enters song information
-                    Console.WriteLine("Track Number: ");
-                    var songTrackNumber = int.Parse(Console.ReadLine());
+                        var website = PromptForString("Band website:  ");
 
-                    var songTitle = PromptForString("Title of the song: ");
+                        var style = PromptForString("Genre of music: ");
 
-                    Console.WriteLine("Album Release Date:");
-                    var songDuration = PromptForString("Song duration - [00:00:00]");
+                        Console.WriteLine("Is the band signed with BeatBox Studio - [Answer = Yes/No]: ");
+                        var isSigned = getBoolInputValue(Console.ReadLine());
 
-                    //not entered by user: var BandId = albumPK;
+                        var contactName = PromptForString("Contact name: ");
 
-                    var newSong = new Song
+                        var contactPhoneNumber = PromptForString("Contact phone: ");
+
+
+                        var newBand = new Band
+                        {
+                            Name = bandName,
+                            CountryOfOrigin = countryOfOrigin,
+                            NumberOfMembers = numberOfMembers,
+                            Website = website,
+                            Style = style,
+                            IsSigned = isSigned,
+                            ContactName = contactName,
+                            ContactPhoneNumber = contactPhoneNumber,
+                        };
+
+                        //4. Add Band to db (context.Bands.Add(newBand);
+                        //5. Save changes - (context.SaveChanges();)
+
+                        context.Bands.Add(newBand);
+                        context.SaveChanges();
+
+                        // Band added, now to add Album with BandID to link the two together
+
+                        //obtain the newly added band Primary Key to pass as the foreign key
+
+                        int albumPK = context.Bands.FirstOrDefault(BandsId => BandsId = bandName;
+                        //User enters album information
+
+                        var albumTitle = PromptForString("Title of the Album: ");
+
+                        Console.WriteLine("Rated Explicit - [Answer = Yes/No]: ");
+                        var isExplicit = getBoolInputValue(Console.ReadLine());
+
+                        Console.WriteLine("Album Release Date:");
+                        var releaseDate = DateTime.Console.ReadLine();
+
+                        //not entered by user: var BandId = albumPK;
+
+                        var newAlbum = new Album
+                        {
+                            Title = albumTitle,
+                            IsExplicit = isExplicit,
+                            ReleaseDate = releaseDate,
+                            BandId = albumPK,
+
+                        };
+
+                        //Add and save the album to the db
+                        context.Albums.Add(newAlbum);
+                        context.SaveChanges();
+
+                        //User enters song information
+                        Console.WriteLine("Track Number: ");
+                        var songTrackNumber = int.Parse(Console.ReadLine());
+
+                        var songTitle = PromptForString("Title of the song: ");
+
+                        Console.WriteLine("Album Release Date:");
+                        var songDuration = PromptForString("Song duration - [00:00:00]");
+
+                        //not entered by user: var BandId = albumPK;
+
+                        var newSong = new Song
+                        {
+
+                            TrackNumber = songTrackNumber,
+                            Title = songTitle,
+                            Duration = songDuration,
+
+                        };
+
+                        //Add and save the album to the db
+                        context.Albums.Add(newAlbum);
+                        context.SaveChanges();
+
+                        Console.WriteLine($"Your entry of {albumTitle} has been saved.");
+                    }
+                }
+
+                //Un-sign a band
+                if (menuOption == "4")
+
+                {
+                    var searchBands = PromptForString("What is the name of the band you would like to un-sign?");
+
+                    var existingBand = context.Bands.FirstOrDefault(Bands => Bands.Name == searchBands);
+
+                    // If we did not find an existing band.
+
+                    if (existingBand == null)
                     {
+                        Console.WriteLine($"{searchBands} does not exist in our records as a Band.\nPlease double check.");
+                    }
 
-                        TrackNumber = songTrackNumber,
-                        Title = songTitle,
-                        Duration = songDuration,
+                    else
 
-                    };
+                    //If not a match, prompt for inputs from user to add Band
 
-                    //Add and save the album to the db
-                    context.Albums.Add(newAlbum);
-                    context.SaveChanges();
+                    {
+                        searchBands.Bands.isSigned = false;
+                        context.SaveChanges();
 
-                    Console.WriteLine($"Your entry of {albumTitle} has been saved.");
+                        Console.WriteLine($"{searchBands} has been updated to 'Un-signed'.");
+
+                    }
                 }
-            }
-
-            //Un-sign a band
-            if (menuOption == "4")
-
-            {
-                var searchBands = PromptForString("What is the name of the band you would like to un-sign?");
-
-                var existingBand = context.Bands.FirstOrDefault(Bands => Bands.Name == searchBands);
-
-                // If we did not find an existing band.
-
-                if (existingBand == null)
-                {
-                    Console.WriteLine($"{searchBands} does not exist in our records as a Band.\nPlease double check.");
-                }
-
-                else
-
-                //If not a match, prompt for inputs from user to add Band
-
-                {
-                    searchBands.Bands.isSigned = false;
-                    context.SaveChanges();
-
-                    Console.WriteLine($"{searchBands} has been updated to 'Un-signed'.");
-
-                }
-
 
                 //Re-sign a band
                 if (menuOption == "5")
                 {
+                    var searchBands = PromptForString("What is the name of the band you would like to re-sign?");
 
-                    Console.WriteLine("Option 5");
+                    var existingBand = context.Bands.FirstOrDefault(Bands => Bands.Name == searchBands);
 
+                    // If we did not find an existing band.
+
+                    if (existingBand == null)
+                    {
+                        Console.WriteLine($"{searchBands} does not exist in our records as a Band.\nPlease double check.");
+                    }
+
+                    else
+
+                    //If not a match, prompt for inputs from user to add Band
+
+                    {
+                        searchBands.Bands.isSigned = true;
+                        context.SaveChanges();
+
+                        Console.WriteLine($"{searchBands} has been updated to 'Un-signed'.");
+
+                    }
                 }
 
 
