@@ -30,7 +30,7 @@ Let a band go (update isSigned to false)
 
 UPDATE "Bands" SET "IsSigned" = 'False' WHERE "Name" = 'Elton John';
 
-Resign a band (update isSigned to true)
+Re-sign a band (update isSigned to true)
 
 UPDATE TO "Bands"
 UPDATE "Bands" SET "IsSigned" = 'True' WHERE "Name" = 'Elton John';
@@ -78,6 +78,12 @@ Review: Clarity on the assignment, when we add, we need to build an entire query
 2. If match, terminate add
 3. If no match, collect the data in prompts needed for the table
 4. If a field is blank for adding, just accept the user input, assign NULL and add to table
+
+Please review the adding of the foreign keys to the classes in VSC
+
+- Why is Roles a list for the join, but Actors and Rating are the db?
+- SQL to C# conversion
+- Unable to load BandId FK on Albums table
 
 \*\*\*Same process for Band, Album and Song, just different tables to write to
 
