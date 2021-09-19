@@ -20,8 +20,6 @@ Add an album for a band
 
 INSERT INTO "Albums" ("Title", "IsExplicit", "ReleaseDate", "NameId", "SongTitleId") VALUES ("Rocket Man", No, 1980, 1, NULL);
 
-**How do we get and assign FK while adding data? Do we search for it first and add to our query? What if an Album doesn't have a song assigned yet. Populate with NULL?**
-
 Add a song to an album
 
 INSERT INTO "Songs" ("TrackNumber", "Title", "Duration") VALUES (4, "Yellow Brick Road", 04:53);
