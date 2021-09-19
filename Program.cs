@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
@@ -72,6 +72,23 @@ namespace RhythmsGonnaGetYou
             return 0;
         }
 
+        static DateTime PromptForDateTime(string prompt)
+        {
+            Console.Write(prompt);
+            DateTime userInput;
+            var isThisGoodInput = DateTime.TryParse(Console.ReadLine(), out userInput);
+
+            if (isThisGoodInput)
+            {
+                return userInput;
+            }
+            else
+            {
+                Console.WriteLine("Sorry, that was not valid. I'm going to use a default date as your date.");
+                return default(DateTime);
+            }
+        }
+
         public static bool getBoolInputValue(string IsSigned)
         {
             var IsSignedToLower = IsSigned.ToLower();
@@ -90,21 +107,10 @@ namespace RhythmsGonnaGetYou
 
             }
         }
+
         static void Main(string[] args)
         {
             var context = new BeatBoxStudioContext();
-            //context.Bands
-            //context.Albums
-            //context.Songs
-
-            //var bandCount = context.Bands.Count();
-            //Console.WriteLine($"There are {bandCount} bands!");
-
-            //var albumCount = context.Albums.Count();
-            //Console.WriteLine($"There are {albumCount} albums!");
-
-            //var songCount = context.Songs.Count();
-            //Console.WriteLine($"There are {songCount} songs!");
 
             var keepGoing = true;
 
@@ -134,8 +140,7 @@ namespace RhythmsGonnaGetYou
                     //If not a match, prompt for inputs from user to add Band
 
                     {
-                        Console.WriteLine("Name of the band: ");
-                        Console.WriteLine($"{searchBands}");
+                        Console.WriteLine($"Name of the band: {searchBands} ");
                         var bandName = searchBands;
 
                         var countryOfOrigin = PromptForString("\nCountry of origin of the band: \n");
@@ -166,8 +171,8 @@ namespace RhythmsGonnaGetYou
                             ContactPhoneNumber = contactPhoneNumber,
                         };
 
-                        //4. Add Band to db (context.Bands.Add(newBand);
-                        //5. Save changes - (context.SaveChanges();)
+                        //Add Band to db
+                        //Save changes 
 
                         context.Bands.Add(newBand);
                         context.SaveChanges();
@@ -180,7 +185,6 @@ namespace RhythmsGonnaGetYou
                 if (menuOption == "2")
 
                 {
-
                     //Search for Album
 
                     Console.WriteLine("What is the name of the album you would like to add?");
@@ -197,8 +201,8 @@ namespace RhythmsGonnaGetYou
                     }
 
                     else
-                    {
 
+                    {
                         //Check for the Band
 
                         var searchBands = PromptForString("What is the name of the band for this album?");
@@ -216,28 +220,24 @@ namespace RhythmsGonnaGetYou
                         else
 
                         {  //Add the Album
-                            Console.WriteLine($"Band: {searchBands}");
+                            Console.WriteLine($"Name of the Band: {searchBands}\n");
 
-                            Console.WriteLine($"Album: {searchAlbums}");
+                            Console.WriteLine($"Album: {searchAlbums}\n");
                             var albumTitle = searchAlbums;
 
-                            Console.WriteLine("Rated Explicit - [Answer = Yes/No]: ");
-                            var isExplicit = getBoolInputValue(Console.ReadLine());
+                            var isExplicit = getBoolInputValue("Rated Explicit - [Answer = Yes/No]: \n");
 
-                            Console.WriteLine("Album Release Date:");
-                            var releaseDate = Console.ReadLine();
-
-                            //releaseDate = parse.DateTime;
+                            var releaseDate = PromptForDateTime("Album Release Date: \n");
 
                             var newAlbum = new Album
                             {
                                 Title = albumTitle,
                                 IsExplicit = isExplicit,
-                                //ReleaseDate = releaseDate;
+                                ReleaseDate = releaseDate
                             };
 
                             //Add and save the album to the db
-                            //context.Albums.Add(newAlbum);
+                            context.Albums.Add(newAlbum);
                             context.SaveChanges();
                             Console.WriteLine($"\n\nYour entry of {albumTitle} has been saved.");
 
@@ -275,30 +275,26 @@ namespace RhythmsGonnaGetYou
                         // If we found an existing album.
                         if (existingAlbum == null)
 
-
                             Console.WriteLine($"\n\n{searchAlbums} does not exist in our records. Please add Album first.");
-
-
 
                         else
 
                         {
                             //User enters song information
 
-                            Console.WriteLine($"Album: {searchAlbums}");
+                            Console.WriteLine($"Album: {searchAlbums}\n");
 
-                            Console.WriteLine($"Song Title: {searchSong}");
-                            var songTitle = searchSong;
+                            Console.WriteLine($"Song Title: {searchSong}\n");
 
-                            Console.WriteLine("Track Number: ");
+                            Console.WriteLine("Track Number: \n");
                             var songTrackNumber = int.Parse(Console.ReadLine());
 
-                            var songDuration = PromptForString("Song duration - [00:00:00]");
+                            var songDuration = PromptForString("Song duration - [00:00:00]\n");
 
                             var newSong = new Song
                             {
                                 TrackNumber = songTrackNumber,
-                                Title = songTitle,
+                                Title = searchSong,
                                 Duration = songDuration,
                             };
 
@@ -306,7 +302,7 @@ namespace RhythmsGonnaGetYou
                             context.Songs.Add(newSong);
                             context.SaveChanges();
 
-                            Console.WriteLine($"Your entry of {songTitle} has been saved.");
+                            Console.WriteLine($"Your entry of {searchSong} has been saved.\n");
                         }
                     }
                 }
@@ -315,7 +311,7 @@ namespace RhythmsGonnaGetYou
                 if (menuOption == "4")
 
                 {
-                    var searchBands = PromptForString("What is the name of the band you would like to un-sign?");
+                    var searchBands = PromptForString("What is the name of the band you would like to un-sign?\n");
 
                     var existingBand = context.Bands.FirstOrDefault(Bands => Bands.Name == searchBands);
 
@@ -323,7 +319,7 @@ namespace RhythmsGonnaGetYou
 
                     if (existingBand == null)
                     {
-                        Console.WriteLine($"\n\n{searchBands} does not exist in our records as a Band.\nPlease double check.");
+                        Console.WriteLine($"\n\n{searchBands} does not exist in our records as a Band.\nPlease double check.\n");
                     }
 
                     else
@@ -334,7 +330,7 @@ namespace RhythmsGonnaGetYou
                         existingBand.IsSigned = false;
                         context.SaveChanges();
 
-                        Console.WriteLine($"\n\n{searchBands} has been updated to 'Un-signed'.");
+                        Console.WriteLine($"\n\n{searchBands} has been updated to 'Un-signed'.\n");
 
                     }
                 }
@@ -342,7 +338,7 @@ namespace RhythmsGonnaGetYou
                 //Re-sign a band
                 if (menuOption == "5")
                 {
-                    var searchBands = PromptForString("What is the name of the band you would like to re-sign?");
+                    var searchBands = PromptForString("What is the name of the band you would like to re-sign?\n");
 
                     var existingBand = context.Bands.FirstOrDefault(Bands => Bands.Name == searchBands);
 
@@ -350,7 +346,7 @@ namespace RhythmsGonnaGetYou
 
                     if (existingBand == null)
                     {
-                        Console.WriteLine($"\n\n{searchBands} does not exist in our records as a Band.\nPlease double check.");
+                        Console.WriteLine($"\n\n{searchBands} does not exist in our records as a Band.\nPlease double check.\n");
                     }
 
                     else
@@ -358,15 +354,11 @@ namespace RhythmsGonnaGetYou
                     //If a match, update isSigned to True
 
                     {
-
-                        //UPDATE "Bands" SET "IsSigned" = 'True' WHERE "Name" = 'Elton John';
-
                         existingBand.IsSigned = true;
 
                         context.SaveChanges();
 
-                        Console.WriteLine($"\n\n{searchBands} has been updated to 'Re-signed'.");
-
+                        Console.WriteLine($"\n\n{searchBands} has been updated to 'Re-signed'.\n");
                     }
                 }
 
@@ -376,7 +368,7 @@ namespace RhythmsGonnaGetYou
                 {
                     foreach (var band in context.Bands)
                     {
-                        Console.WriteLine($"There is a band named {band.Name} in our records.");
+                        Console.WriteLine($"There is a band named {band.Name} in our records.\n");
                     }
                 }
 
@@ -384,17 +376,15 @@ namespace RhythmsGonnaGetYou
                 //View all albums by a band
                 if (menuOption == "7")
                 {
-                    var bandAlbum = PromptForString("Which band's albums would you like to view?");
-                    //bandAlbum = context.Albums.Include(album => album.Id).ThenInclude(context.bands => band.Name);
 
+                    var bandQuery = PromptForString("Which band's albums would you like to view?\n");
 
-                    //FROM "Albums"
-                    //JOIN "Bands" ON "Albums"."BandId" = "Bands"."Id"
-                    //JOIN "Songs" ON "Songs"."AlbumId" = "Albums"."Id"
+                    var albumsFromBand = context.Bands.FirstOrDefault(band => band.Name == bandQuery);
+                    var albumName = context.Albums.Include(album => album.Band).Where(album => album.Band == albumsFromBand);
 
                     foreach (var album in context.Albums)
                     {
-                        //Console.WriteLine($"There is an album titled {album.Title} in our records for {band.Name}.");
+                        Console.WriteLine($"There is an album titled {album.Title} in our records for {band.Name}.\n");
 
                     }
 
@@ -404,10 +394,12 @@ namespace RhythmsGonnaGetYou
                 if (menuOption == "8")
                 {
 
-                    //SELECT *
-                    //FROM "Albums"
-                    //JOIN "Songs" ON "AlbumId"="Albums"."Id"
-                    //ORDER BY "ReleaseDate";
+                    var albumsByReleaseDate = context.Albums.OrderBy(Album => Album.ReleaseDate);
+
+                    foreach (var album in albumsByReleaseDate)
+                    {
+                        Console.WriteLine($"{album.Title} was released on {album.ReleaseDate.ToString("MM/dd/yyyy")}");
+                    }
 
                 }
                 else
@@ -416,9 +408,12 @@ namespace RhythmsGonnaGetYou
                 if (menuOption == "9")
                 {
 
-                    //SELECT *
-                    //FROM "Bands"
-                    //WHERE "Bands"."IsSigned" = True;
+                    var signedBands = context.Bands.Where(Band => Band.IsSigned == true);
+
+                    foreach (var band in signedBands)
+                    {
+                        Console.WriteLine($"{band.Name} is a signed band");
+                    }
 
                 }
                 else
@@ -427,9 +422,12 @@ namespace RhythmsGonnaGetYou
                 if (menuOption == "10")
                 {
 
-                    //SELECT *
-                    //FROM "Bands"
-                    //WHERE "Bands"."IsSigned" = False;
+                    var nonsignedBands = context.Bands.Where(Band => Band.IsSigned == false);
+
+                    foreach (var band in nonsignedBands)
+                    {
+                        Console.WriteLine($"{band.Name} is an unsigned band");
+                    }
 
                 }
                 else
@@ -445,7 +443,6 @@ namespace RhythmsGonnaGetYou
                 {
                     Console.WriteLine("\nPlease input the number from the menu.\n");
                 }
-
             }
         }
     }
